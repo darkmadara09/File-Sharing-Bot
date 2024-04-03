@@ -1,5 +1,4 @@
 from bot import Bot
-import psutil
 from pyrogram.types import Message
 from pyrogram import filters
 from config import ADMINS, BOT_STATS_TEXT, USER_REPLY_TEXT
@@ -10,19 +9,8 @@ from helper_func import get_readable_time
 async def stats(bot: Bot, message: Message):
     now = datetime.now()
     delta = now - bot.uptime
-    uptime = get_readable_time(delta.seconds)
-    cpu = psutil.cpu_percent()
-    storage = psutil.disk_usage('/')
-    reply_text = (
-        f"➪ᴜᴘᴛɪᴍᴇ: {uptime}\n"
-        f"➪ᴄᴘᴜ: {cpu}%\n"
-        f"➪ꜱᴛᴏʀᴀɢᴇ: {size_formatter(storage.total)} [ᴛᴏᴛᴀʟ]\n"
-        f"➪{size_formatter(storage.used)} [ᴜsᴇᴅ]\n"
-        f"➪{size_formatter(storage.free)} [ғʀᴇᴇ]\n"
-        f"➪ᴘʏᴛʜᴏɴ ᴠᴇʀsɪᴏɴ: {python_version},"
-    )
-
-    await message.reply(reply_text, quote=True)
+    time = get_readable_time(delta.seconds)
+    await message.reply(BOT_STATS_TEXT.format(uptime=time))
 
 
 @Bot.on_message(filters.private & filters.incoming)

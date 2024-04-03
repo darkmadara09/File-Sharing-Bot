@@ -13,9 +13,6 @@ async def stats(bot: Bot, message: Message):
     uptime = get_readable_time(delta.seconds)
     cpu = psutil.cpu_percent()
     storage = psutil.disk_usage('/')
-
-    python_version = platform.python_version()
-
     reply_text = (
         f"➪ᴜᴘᴛɪᴍᴇ: {uptime}\n"
         f"➪ᴄᴘᴜ: {cpu}%\n"

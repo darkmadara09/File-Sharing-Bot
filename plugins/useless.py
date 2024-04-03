@@ -7,7 +7,7 @@ from helper_func import get_readable_time
 
 @Bot.on_message(filters.command('stats') & filters.user(ADMINS))
 async def stats(bot: Bot, message: Message):
-    uptime = time_formatter((time.time() - start_time) * 1000)
+    uptime = get_readable_time(delta.seconds)
     cpu = psutil.cpu_percent()
     storage = psutil.disk_usage('/')
 
